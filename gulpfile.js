@@ -1,22 +1,34 @@
 'use strict';
 
-var gulp 			= require('gulp');
-var sass 			= require('gulp-sass');
-var autoprefixer 	= require('gulp-autoprefixer');
-var concat 		   	= require('gulp-concat');
-var sourcemaps 	 	= require('gulp-sourcemaps');
-var minifyjs 		= require('gulp-uglify');
-var minifycss 		= require('gulp-uglifycss');
-var notify 			= require('gulp-notify');
-var rename 			= require('gulp-rename');
-var plumber			= require('gulp-plumber');
-var jshint		  	= require('gulp-jshint');
-var filter          = require('gulp-filter');
-var browserSync 	= require('browser-sync');
+/*****************
+ * ! Project Setup
+/*****************/
 
-var reload 		   	= browserSync.reload;
-var url 			= 'localhost:8888/sandbox';
-var source     		= './assets/';
+/* Dependencies */
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
+var minifyjs = require('gulp-uglify');
+var minifycss	= require('gulp-uglifycss');
+var notify = require('gulp-notify');
+var rename = require('gulp-rename');
+var plumber	= require('gulp-plumber');
+var jshint = require('gulp-jshint');
+var filter = require('gulp-filter');
+var browserSync	= require('browser-sync');
+
+/* Variables */
+var reload = browserSync.reload;
+var url = 'localhost:8888/sandbox';
+var source = './assets/';
+var build = './build/';
+var project = 'sip';
+
+/*************************************************************************
+ * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+/*************************************************************************/
 
 /* Asynchronous browser syncing of assets across multiple devices */
 gulp.task('browser-sync', function() {
@@ -25,7 +37,11 @@ gulp.task('browser-sync', function() {
   });
 });
 
-/* Compiles Sass */
+/*************************************************************************
+ * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+/*************************************************************************/
+
+/* Compile Sass Task */
 gulp.task('styles', function() {
   return gulp.src([source + 'sass/app.scss'])
     .pipe(plumber({
@@ -58,7 +74,54 @@ gulp.task('styles', function() {
     .pipe(notify({ message: 'Styles task complete', onLast: true }));
 });
 
-/* Default task */
-gulp.task('default', ['styles', 'browser-sync'], function() {
+/*************************************************************************
+ * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+/*************************************************************************/
+
+/* Concat and uglify JS Task */
+gulp.task('js', function() {
+  return gulp.src([
+      source + 'js/components/*.js',
+      source + 'js/app/**/*.js'
+    ])
+    .pipe(concat('development.js'))
+    .pipe(gulp.dest(source + 'js'))
+    .pipe(rename({
+      basename: 'production',
+      suffix: '-min',
+    }))
+    .pipe(minifyjs())
+    .pipe(gulp.dest(source + 'js/'))
+    .pipe(notify({ message: 'Scripts task complete', onLast: true }));
+});
+
+/* jsHint Task */
+gulp.task('jsHint', function() {
+  return gulp.src([source + 'js/app/**/*.js'])
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('default'))
+    .pipe(notify({ message: 'jsHint task complete', onLast: true }));
+});
+
+/*************************************************************************
+ * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+/*************************************************************************/
+
+/* Optimize Images */
+gulp.task('images', function() {
+  return gulp.src([source + 'img/raw/**/*.{png,jpg,gif}'])
+    .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+    .pipe(gulp.dest(source + 'img/'))
+    .pipe(notify({ message: 'images task complete', onLast: true }));
+});
+
+/*************************************************************************
+ * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+/*************************************************************************/
+
+/* Development Task */
+gulp.task('default', ['styles', 'js', 'jsHint', 'browser-sync'], function() {
   gulp.watch(source + 'sass/**/*.scss', ['styles']);
+  gulp.watch(source + 'js/app/**/*.js', ['js', browserSync.reload]);
+  gulp.watch(source + 'js/app/**/*.js', ['jsHint']);
 });
