@@ -13,22 +13,20 @@
 /***********************************************************************************/
 
 // Always required
-@import 
-  "_properties";
+@import "_properties";
 
-// Import the animations
-@import
-  "_attention-seekers/attention-seekers.scss",
-  "_bouncing-entrances/bouncing-entrances.scss",
-  "_bouncing-exits/bouncing-exits.scss",
-  "_fading-entrances/fading-entrances.scss",
-  "_fading-exits/fading-exits.scss",
-  "_flippers/flippers.scss",
-  "_lightspeed/lightspeed.scss",
-  "_rotating-entrances/rotating-entrances.scss",
-  "_rotating-exits/rotating-exits.scss",
-  "_sliding-entrances/sliding-entrances.scss",
-  "_sliding-exits/sliding-exits.scss",
-  "_specials/specials.scss",
-  "_zooming-entrances/zooming-entrances.scss",
-  "_zooming-exits/zooming-exits.scss";
+// Uncomment the animations below to add them one by one to the project
+// @import "_attention-seekers/attention-seekers.scss";
+// @import "_bouncing-entrances/bouncing-entrances.scss";
+// @import "_bouncing-exits/bouncing-exits.scss";
+// @import "_fading-entrances/fading-entrances.scss";
+// @import "_fading-exits/fading-exits.scss";
+// @import "_flippers/flippers.scss";
+// @import "_lightspeed/lightspeed.scss";
+// @import "_rotating-entrances/rotating-entrances.scss";
+// @import "_rotating-exits/rotating-exits.scss";
+// @import "_sliding-entrances/sliding-entrances.scss";
+// @import "_sliding-exits/sliding-exits.scss";
+// @import "_specials/specials.scss";
+// @import "_zooming-entrances/zooming-entrances.scss";
+// @import "_zooming-exits/zooming-exits.scss";
