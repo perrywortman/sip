@@ -1,8 +1,8 @@
 'use strict';
 
 /*****************
- * ! Project Setup
-/*****************/
+ * Project Setup
+/****************/
 
 /* Dependencies */
 var gulp = require('gulp');
@@ -11,24 +11,24 @@ var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyjs = require('gulp-uglify');
-var minifycss	= require('gulp-uglifycss');
+var minifycss = require('gulp-uglifycss');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
-var plumber	= require('gulp-plumber');
+var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
+var imagemin = require('gulp-imagemin');
 var filter = require('gulp-filter');
-var browserSync	= require('browser-sync');
+var runSequence = require('gulp-run-sequence');
+var del = require('del');
+var zip = require('gulp-zip');
+var browserSync = require('browser-sync');
 
 /* Variables */
 var reload = browserSync.reload;
-var url = 'localhost:8888/sandbox';
+var url = 'localhost:8888/sip'; // Change to fit your dev environment
 var source = './assets/';
 var build = './build/';
-var project = 'sip';
-
-/*************************************************************************
- * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
-/*************************************************************************/
+var project = 'sip'; // Names the .zip file on build task
 
 /* Asynchronous browser syncing of assets across multiple devices */
 gulp.task('browser-sync', function() {
@@ -37,11 +37,11 @@ gulp.task('browser-sync', function() {
   });
 });
 
-/*************************************************************************
- * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
-/*************************************************************************/
+/***********
+ * CSS Task
+/**********/
 
-/* Compile Sass Task */
+/* Compile Sass */
 gulp.task('styles', function() {
   return gulp.src([source + 'sass/app.scss'])
     .pipe(plumber({
@@ -74,11 +74,11 @@ gulp.task('styles', function() {
     .pipe(notify({ message: 'Styles task complete', onLast: true }));
 });
 
-/*************************************************************************
- * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
-/*************************************************************************/
+/***********
+ * JS Tasks
+/**********/
 
-/* Concat and uglify JS Task */
+/* Concat and uglify JS */
 gulp.task('js', function() {
   return gulp.src([
       source + 'js/components/*.js',
@@ -92,10 +92,10 @@ gulp.task('js', function() {
     }))
     .pipe(minifyjs())
     .pipe(gulp.dest(source + 'js/'))
-    .pipe(notify({ message: 'Scripts task complete', onLast: true }));
+    .pipe(notify({ message: 'JS task complete', onLast: true }));
 });
 
-/* jsHint Task */
+/* jsHint */
 gulp.task('jsHint', function() {
   return gulp.src([source + 'js/app/**/*.js'])
     .pipe(jshint('.jshintrc'))
@@ -103,25 +103,86 @@ gulp.task('jsHint', function() {
     .pipe(notify({ message: 'jsHint task complete', onLast: true }));
 });
 
-/*************************************************************************
- * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
-/*************************************************************************/
+/*****************
+ * Other Tasks
+/*****************/
 
 /* Optimize Images */
 gulp.task('images', function() {
-  return gulp.src([source + 'img/raw/**/*.{png,jpg,gif}'])
+  return gulp.src([source + 'img/raw/**/*.+(png|jpg|jpeg|gif|svg)'])
     .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
     .pipe(gulp.dest(source + 'img/'))
-    .pipe(notify({ message: 'images task complete', onLast: true }));
+    .pipe(notify({ message: 'Images task complete', onLast: true }));
 });
 
-/*************************************************************************
- * ! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
-/*************************************************************************/
+/* Build PHP */
+gulp.task('buildPhp', function() {
+  return gulp.src(['**/*.php', './style.css', './screenshot.png'])
+    .pipe(gulp.dest(build))
+    .pipe(notify({ message: 'BuildPhp task complete', onLast: true }));
+});
 
-/* Development Task */
-gulp.task('default', ['styles', 'js', 'jsHint', 'browser-sync'], function() {
+/* Build JS Production */
+gulp.task('buildJsProd', function() {
+  return gulp.src([source + 'js/production-min.js'])
+    .pipe(gulp.dest(build + '/assets/js'))
+    .pipe(notify({ message: 'Copy of Assets/js directory complete', onLast: true }));
+});
+
+/* Build JS Vendor */
+gulp.task('buildJsVend', function() {
+  return gulp.src([source + 'js/vendor/*.js'])
+    .pipe(gulp.dest(build + '/assets/js/vendor'))
+    .pipe(notify({ message: 'Copy of js/vendor directory complete', onLast: true }));
+});
+
+/* Build CSS */
+gulp.task('buildCss', function() {
+  return gulp.src([source + 'css/app-min.css'])
+    .pipe(gulp.dest(build + '/assets/css'))
+    .pipe(notify({ message: 'Copy of Assets directory complete', onLast: true }));
+});
+
+/* Build Images */
+gulp.task('buildImg', function() {
+  return gulp.src([source + 'img/*.+(png|jpg|jpeg|gif|svg)'])
+    .pipe(gulp.dest(build + 'assets/img/'))
+    .pipe(notify({ message: 'BuildImg task complete', onLast: true }));
+});
+
+/* Build Library */
+gulp.task('buildLib', function() {
+  return gulp.src(['./lib/languages/*'])
+    .pipe(gulp.dest(build + 'lib/languages'))
+    .pipe(notify({ message: 'Copy of lib/languages directory complete', onLast: true }));
+});
+
+/* Clean Task */
+gulp.task('clean', function(cb) {
+  return del(['**/build', '**/.DS_Store'], cb);
+});
+
+/* Zip up */
+gulp.task('buildZip', function() {
+  return gulp.src([build + '/**/'])
+    .pipe(zip(project + '.zip'))
+    .pipe(gulp.dest('./'))
+    .pipe(notify({ message: 'Zip task complete', onLast: true }));
+});
+
+/**************
+ * Main Tasks
+/*************/
+
+/* Build */
+gulp.task('build', function(cb) {
+  runSequence('clean', 'styles', 'js', 'buildPhp', 'buildCss', 'buildJsProd', 'buildJsVend', 'buildLib', 'buildImg', 'buildZip', 'clean', cb);
+});
+
+/* Default */
+gulp.task('default', ['styles', 'js', 'jsHint', 'images', 'browser-sync'], function() {
   gulp.watch(source + 'sass/**/*.scss', ['styles']);
   gulp.watch(source + 'js/app/**/*.js', ['js', browserSync.reload]);
   gulp.watch(source + 'js/app/**/*.js', ['jsHint']);
+  gulp.watch(source + 'img/**/*.{png,jpg,gif}', ['images']);
 });
