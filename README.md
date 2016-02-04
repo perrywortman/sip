@@ -9,7 +9,7 @@ What's Inside?
 
 My ultra-minimal SCSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
 
-* Bourbon (http://bourbon.io), Neat (http://neat.bourbon.io), Bitters (http://bitters.bourbon.io) and Refills (http://refills.bourbon.io) â€” Bourbon provides a lightweight Sass library (similar to Compass).
+* Bourbon (http://bourbon.io), Neat (http://neat.bourbon.io), Bitters (http://bitters.bourbon.io) and Refills (http://refills.bourbon.io) &mdash; Bourbon provides a lightweight Sass library (similar to Compass).
 
 	* Neat extends bourbon and provides a nice and lightweight grid framework as a base for this project. Refills and Bitters provide additional styling and UI elements. I suggest you visit each of these projects to learn more and how to use them.
 
@@ -29,7 +29,7 @@ My ultra-minimal SCSS might make me look like theme tartare but that means less 
 
 * Sass. We're using it and to update this theme you should be cozy with it or get ready to learn how to use. If you don't know Sass, you should definitely jump in. The water's fine and you'll thank me later. I accept thanks in tacos and tea: Earl Gray, hot.
 
-* Gulpjs Task Automation â€” This has been a biggy! Lots of work done and yet to-do. Your gulpjs file will help automate nifty
+* Gulpjs Task Automation &mdash; This has been a biggy! Lots of work done and yet to-do. Your gulpjs file will help automate nifty
 tasks such as autoprefixing, compiling and minifying Sass files; cleaning up your theme directory and even packaging/zipping
 your theme! Cool. Right?
 
@@ -46,7 +46,7 @@ There are things you need to install before you hack away at things. Fortunately
   * You will also need to download and install [Sass](http://sass-lang.com/install)
 
 * #### Getting and Installing the Theme
-  * The first thing youâ€™ll want to do is grab a copy of the theme and then rename the directory to the name of your theme or website.
+  * The first thing you'll want to do is grab a copy of the theme and then rename the directory to the name of your theme or website.
 
 * #### Install Gulp
 
@@ -54,7 +54,7 @@ There are things you need to install before you hack away at things. Fortunately
 
    **_(note - you may have to run the following commands as admin or sudo)_**
 
-  * **Install Gulp** â€” Open a command prompt/terminal and navigate to your theme's root directory and run this command: `npm install` - This installs all the necessary Gulp plugins to help with task automation such as Sass compiling and browser-sync! You'll need to run this step on each of your projects, going forward.
+  * **Install Gulp** &mdash; Open a command prompt/terminal and navigate to your theme's root directory and run this command: `npm install` - This installs all the necessary Gulp plugins to help with task automation such as Sass compiling and browser-sync! You'll need to run this step on each of your projects, going forward.
 
  * #### Set your project configuration in Gulpfile.js!!
 _Be sure to go into gulpfile.js and setup the project configuration variables._
