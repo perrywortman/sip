@@ -9,27 +9,23 @@ Hi. I'm `sip`. I'm a theme meant for hacking so don't use me as a Parent Theme. 
 
 My ultra-minimal SCSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
 
-* A just right amount of lean, well-commented, modern, HTML5 templates.
-* A helpful 404 template.
-* A sample custom header implementation in `inc/custom-header.php` that can be activated by uncommenting one line in `functions.php` and adding the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
-* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
-* Some small tweaks in `inc/extras.php` that can improve your theming experience.
-* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
-* 2 sample CSS layouts in `layouts/` for a sidebar on either side of your content.
-* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
-* Licensed under GPLv2 or later. :) Use it to make something cool.
-
-
-What else's inside?
----------------
-
 * Bourbon (http://bourbon.io), Neat (http://neat.bourbon.io), Bitters (http://bitters.bourbon.io) and Refills (http://refills.bourbon.io) â€” Bourbon provides a lightweight Sass library (similar to Compass).
 
-Neat extends bourbon and provides a nice and lightweight grid framework as a base for this project. Refills and Bitters provide additional styling and UI elements. I suggest you visit each of these projects to learn more and how to use them.
+	* Neat extends bourbon and provides a nice and lightweight grid framework as a base for this project. Refills and Bitters provide additional styling and UI elements. I suggest you visit each of these projects to learn more and how to use them.
 
-Bitters is baked-in, too! You get some basic nifty styles out of the gate.
+	* Bitters is baked-in, too! You get some basic nifty styles out of the gate.
 
 * Underscores (_s) based theme. Smarter folks than me building great shit (http://underscores.me)
+	
+	* A just right amount of lean, well-commented, modern, HTML5 templates.
+	* A helpful 404 template.
+	* A sample custom header implementation in `inc/custom-header.php` that can be activated by uncommenting one line in `functions.php` and adding the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
+	* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
+	* Some small tweaks in `inc/extras.php` that can improve your theming experience.
+	* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
+	* 2 sample CSS layouts in `layouts/` for a sidebar on either side of your content.
+	* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
+	* Licensed under GPLv2 or later. :) Use it to make something cool.
 
 * Sass. We're using it and to update this theme you should be cozy with it or get ready to learn how to use. If you don't know Sass, you should definitely jump in. The water's fine and you'll thank me later. I accept thanks in tacos and tea: Earl Gray, hot.
 
