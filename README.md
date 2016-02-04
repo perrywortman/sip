@@ -2,10 +2,10 @@
 
 ### A WordPress Theme Using _s, Bourbon + Neat and Gulp
 
-Description
----------------
-
 Hi. I'm `sip`. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+
+What's Inside?
+---------------
 
 My ultra-minimal SCSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
 
@@ -39,7 +39,7 @@ There's a lot to this theme, but don't be intimidated, even if you're not an "ad
 
 Bourbon and Neat are used for providing simple Sass mixins and leverages a simple grid system that let's you markup your theme how you want, while you use their math, unlike Bootstrap and Foundation, presently.
 
-There are things you need to install before you hack away at things. There are three package managers to install: Node (which installs the NPM package manager), Bower and Composer. Each of these have dependencies that also need to be installed. Fortunately, this is all "fairly easy".
+There are things you need to install before you hack away at things. Fortunately, this is all "fairly easy".
 
 * #### Prerequisites
   * You'll need to download and install [Node](https://nodejs.org/)
@@ -48,7 +48,7 @@ There are things you need to install before you hack away at things. There are t
 * #### Getting and Installing the Theme
   * The first thing youâ€™ll want to do is grab a copy of the theme and then rename the directory to the name of your theme or website.
 
-* #### Install Gulpjs, Composer and Bower + Dependencies
+* #### Install Gulp
 
   Once you have Node, Sass and the theme installed, the next step is simple enough.
 
@@ -60,10 +60,6 @@ There are things you need to install before you hack away at things. There are t
 _Be sure to go into gulpfile.js and setup the project configuration variables._
 
  	* This is important for using Browser-Sync with your project. Make sure in gulpfile.js that you set the `project` variable to the appropriate name for your project URL. Default is "yourlocal.dev"
-
- * #### Generating your styles
-   * In pre 1.1.11 builds of Sip, Style.scss would process/compile all of your changes to the various Sass files. This has changed in 1.1.11. We have added rtl
-   support using a set of mixins from the Bi-App-Sass [view](http://anasnakawa.github.io/bi-app-sass/) project which helps us generate styles for RTL configurations. All LTR styles are output to style.css and RTL styles are output to rtl.css.
 
 * #### Gulp Tasks
 There are a couple of tasks built into Sip to help get you going.
